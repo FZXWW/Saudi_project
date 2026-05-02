@@ -15,8 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
 
     if ($user = $result->fetch_assoc()) {
-        // التحقق من كلمة المرور (مشفره)
-        if ($password == $user['password']) {            $_SESSION['admin_id'] = $user['id'];
+        // التحقق من كلمة المرور
+        if ($password == $user['password']) {
+            $_SESSION['admin_id'] = $user['id'];
             $_SESSION['username'] = $username;
             header("Location: dashboard.php");
             exit();
@@ -29,23 +30,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل دخول المشرف</title>
+    <title>تسجيل دخول المشرف - اكتشف السعودية</title>
+    <!-- تأكد أن ملف style.css يحتوي على الكود الأخير الذي أرسلته لك -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="login-body"> <!-- الكلاس الضروري لتوسيط البطاقة والخلفية -->
+
+    <!-- إضافة الناف بار هنا -->
+    <nav class="navbar" style="position: absolute; top: 0; width: 100%;">
+        <div class="logo">اكتشف السعودية</div>
+        <div class="nav-links">
+            <a href="index.php">الرئيسية</a>
+            <a href="index.php#explore">معرض المناطق</a>
+        </div>
+    </nav>
 
     <div class="login-card">
+        <div style="font-size: 3.5rem; margin-bottom: 15px;">🛡️</div>
         <h2>تسجيل دخول المشرف</h2>
 
-        <!-- عرض رسالة الخطأ فقط إذا وجد خطأ -->
+        <!-- عرض رسالة الخطأ بتنسيق عصري -->
         <?php if (!empty($error)): ?>
-            <div class="error-msg">
+            <div class="error-msg" style="background: rgba(231, 76, 60, 0.1); border: 1px solid var(--error-color); border-radius: 8px; padding: 10px; margin-bottom: 20px;">
                 <?php echo $error; ?>
             </div>
         <?php endif; ?>
@@ -57,8 +68,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="input-group">
                 <input type="password" name="password" placeholder="كلمة المرور" required>
             </div>
-            <button type="submit">دخول</button>
+            <button type="submit">دخول النظام</button>
         </form>
+
+        <div style="margin-top: 30px;">
+            <a href="index.php" class="back-link">← العودة للموقع الرئيسي</a>
+        </div>
     </div>
 
 </body>

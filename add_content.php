@@ -8,21 +8,36 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-$message = "";
+// حل مشكلة المتغير غير المعرف - تعريف المتغير بقيمة فارغة في البداية
+$message = ""; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $category = $_POST['category'];
     $description = $_POST['description'];
-    
-    $stmt = $conn->prepare("INSERT INTO content (name, category, description) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $name, $category, $description);
-    
+    $features = $_POST['features'];
+    $activities = $_POST['activities'];
+    $landmarks = $_POST['landmarks'];
+
+    // التعامل مع الصور
+    $main_image = $_FILES['image_url']['name'];
+    $gallery1 = $_FILES['gallery1']['name'];
+    $gallery2 = $_FILES['gallery2']['name'];
+    $gallery3 = $_FILES['gallery3']['name'];
+
+    // مسارات الرفع
+    move_uploaded_file($_FILES['image_url']['tmp_name'], "images/" . $main_image);
+    move_uploaded_file($_FILES['gallery1']['tmp_name'], "images/" . $gallery1);
+    move_uploaded_file($_FILES['gallery2']['tmp_name'], "images/" . $gallery2);
+    move_uploaded_file($_FILES['gallery3']['tmp_name'], "images/" . $gallery3);
+
+    $stmt = $conn->prepare("INSERT INTO content (name, category, description, image_url, features, activities, landmarks, gallery1, gallery2, gallery3) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssss", $name, $category, $description, $main_image, $features, $activities, $landmarks, $gallery1, $gallery2, $gallery3);
+
     if ($stmt->execute()) {
-        header("Location: dashboard.php?msg=added");
-        exit();
+        $message = "✅ تم إضافة المكان بنجاح!";
     } else {
-        $message = "حدث خطأ أثناء الإضافة!";
+        $message = "❌ حدث خطأ أثناء الإضافة.";
     }
 }
 ?>
@@ -31,45 +46,127 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إضافة منطقة جديدة</title>
-    <!-- ربط ملف الـ CSS الموحد -->
+    <title>إضافة مكان جديد - لوحة التحكم</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ستايل مخصص لتقسيم الفورم بشكل عصري */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .full-row { grid-column: span 2; }
+        
+        .section-divider {
+            grid-column: span 2;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 20px 0 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="form-container">
-    <h2>إضافة منطقة/معلم جديد</h2>
-    
-    <?php if($message): ?>
-        <p style="color: var(--error-color); text-align: center;"><?php echo $message; ?></p>
-    <?php endif; ?>
-    
-    <form method="POST">
-        <div class="form-group">
-            <input type="text" name="name" placeholder="اسم المنطقة (مثلاً: العلا)" required>
+    <nav class="navbar">
+        <div class="logo">اكتشف السعودية</div>
+        <div class="nav-links">
+            <a href="dashboard.php">لوحة التحكم</a>
+            <a href="logout.php" style="color: var(--error-color);">تسجيل الخروج</a>
         </div>
-        
-        <div class="form-group">
-            <select name="category" required>
-                <option value="" disabled selected>اختر المنطقة الإدارية</option>
-                <option value="المنطقة الوسطى">المنطقة الوسطى</option>
-                <option value="المنطقة الغربية">المنطقة الغربية</option>
-                <option value="المنطقة الشرقية">المنطقة الشرقية</option>
-                <option value="المنطقة الشمالية">المنطقة الشمالية</option>
-                <option value="المنطقة الجنوبية">المنطقة الجنوبية</option>
-            </select>
-        </div>
+    </nav>
 
-        <div class="form-group">
-            <textarea name="description" placeholder="وصف المنطقة ومعالمها الشهيرة..." required></textarea>
+    <div class="form-container" style="max-width: 900px; margin-top: 40px;">
+        <h2>✨ إضافة وجهة سعودية جديدة</h2>
+
+        <?php if ($message): ?>
+            <div style="padding: 15px; margin-bottom: 20px; border-radius: 8px; text-align: center; background: rgba(0, 94, 59, 0.1); border: 1px solid var(--primary-color);">
+                <?php echo $message; ?>
+            </div>
+        <?php endif; ?>
+
+        <form action="add_content.php" method="POST" enctype="multipart/form-data">
+            <div class="form-grid">
+                
+                <div class="section-divider">📍 المعلومات الأساسية</div>
+
+                <div class="form-group">
+                    <label>اسم المكان:</label>
+                    <input type="text" name="name" placeholder="مثال: مدينة العلا" required>
+                </div>
+
+                <div class="form-group">
+                    <label>الموقع (المنطقة):</label>
+                    <select name="category" required>
+                        <option value="">اختر المنطقة...</option>
+                        <option value="المنطقة الوسطى">المنطقة الوسطى</option>
+                        <option value="المنطقة الغربية">المنطقة الغربية</option>
+                        <option value="المنطقة الشرقية">المنطقة الشرقية</option>
+                        <option value="المنطقة الشمالية">المنطقة الشمالية</option>
+                        <option value="المنطقة الجنوبية">المنطقة الجنوبية</option>
+                    </select>
+                </div>
+
+                <div class="section-divider">✨ التفاصيل الإضافية</div>
+
+                <div class="form-group">
+                    <label>المميزات:</label>
+                    <input type="text" name="features" placeholder="مثال: مواقع أثرية، طبيعة خلابة">
+                </div>
+
+                <div class="form-group">
+                    <label>الأنشطة المتاحة:</label>
+                    <input type="text" name="activities" placeholder="مثال: رحلات جبلية، تخييم">
+                </div>
+
+                <div class="form-group full-row">
+                    <label>المعالم البارزة (افصل بينها بفاصلة):</label>
+                    <input type="text" name="landmarks" placeholder="مثال: مدائن صالح، جبل الفيل">
+                </div>
+
+                <div class="form-group full-row">
+                    <label>وصف تفصيلي عن المكان:</label>
+                    <textarea name="description" rows="5" placeholder="اكتب وصفاً جذاباً وتاريخياً للمكان..." required></textarea>
+                </div>
+
+                <div class="section-divider">🖼️ معرض الصور</div>
+
+                <div class="form-group">
+                    <label>الصورة الرئيسية للمكان:</label>
+                    <input type="file" name="image_url" required>
+                </div>
+
+                <div class="form-group">
+                    <label>صورة المعرض الأولى:</label>
+                    <input type="file" name="gallery1" required>
+                </div>
+
+                <div class="form-group">
+                    <label>صورة المعرض الثانية (اختياري):</label>
+                    <input type="file" name="gallery2">
+                </div>
+
+                <div class="form-group">
+                    <label>صورة المعرض الثالثة (اختياري):</label>
+                    <input type="file" name="gallery3">
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn-add" style="width: 100%; margin-top: 30px; padding: 18px; font-size: 1.1rem;">
+                🚀 اعتماد وإضافة المكان للموقع
+            </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <a href="dashboard.php" class="back-link">← العودة للوحة التحكم</a>
         </div>
-        
-        <button type="submit">حفظ البيانات</button>
-    </form>
-    
-    <a href="dashboard.php" class="back-link">← العودة للوحة التحكم</a>
-</div>
+    </div>
 
 </body>
 </html>

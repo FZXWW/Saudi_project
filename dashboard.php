@@ -51,8 +51,8 @@ $result = $conn->query($query);
                 <td><?php echo $row['category']; ?></td>
                 <td><?php echo mb_strimwidth($row['description'], 0, 50, "..."); ?></td>
                 <td class="action-links">
-                    <a href="update_content.php?id=<?php echo $row['id']; ?>">تعديل</a> | 
-                    <a href="delete.php?id=<?php echo $row['id']; ?>" class="delete-link" onclick="return confirm('هل أنت متأكد من حذف هذا السجل؟')">حذف</a>
+                    <a href="update_content.php?id=<?php echo $row['id']; ?>" class="btn-update">تعديل</a> | 
+                    <a href="delete.php?id=<?php echo $row['id']; ?>" class="btn-delete" onclick="return confirm('هل أنت متأكد من حذف هذا السجل؟')">حذف</a>
                 </td>
             </tr>
             <?php endwhile; ?>
