@@ -1,0 +1,318 @@
+:root {
+    --primary-color: #005e3b;      /* اللون الأخضر الأساسي للمملكة */
+    --background-color: #616161;   /* لون خلفية الصفحة */
+    --card-bg: #000000;           /* لون البطاقات */
+    --text-color: #ffffff;        /* لون النصوص */
+    --error-color: #d93025;       /* لون التنبيهات */
+    --button-hover: #0069d2;      /* لون الأزرار عند التفاعل */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: var(--text-color);
+}
+
+
+/* login page*/
+.login-card {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+
+.login-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+}
+
+.error-msg {
+    background-color: #fcadad;
+    color: var(--error-color);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 14px;
+}
+
+
+
+
+
+/*add content page*/
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-container input, 
+.form-container select, 
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.form-container textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--primary-color);
+}
+
+
+/* --- Dashboard Styles --- */
+
+.container { 
+    width: 95%; 
+    max-width: 1100px;
+    margin: 30px auto; 
+    background: var(--card-bg); /* ستكون سوداء حسب متغيراتك */
+    padding: 25px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+    color: var(--text-color); /* نص أبيض */
+}
+
+.container h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 25px; 
+    color: var(--text-color);
+}
+
+th, td { 
+    padding: 15px; 
+    border-bottom: 1px solid #333; /* حدود داكنة تناسب الأسود */
+    text-align: center; 
+}
+
+th { 
+    background-color: var(--primary-color); 
+    color: white; 
+}
+
+tr:hover {
+    background-color: #1a1a1a; /* تأثير تمرير داكن */
+}
+
+.btn-add { 
+    background: var(--primary-color); 
+    color: white; 
+    padding: 10px 20px; 
+    text-decoration: none; 
+    border-radius: 6px; 
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.btn-logout { 
+    background: var(--error-color); 
+    color: white; 
+    padding: 8px 18px; 
+    text-decoration: none; 
+    border-radius: 6px; 
+    float: left; /* ليكون في الجهة المقابلة */
+}
+
+.action-links a {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin: 0 5px;
+}
+
+.delete-link { 
+    color: var(--error-color) !important; 
+}
+
+
+/* --- Public Index Styles --- */
+
+.hero-section {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--card-bg);
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.hero-section h1 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+}
+
+.public-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.public-card:hover {
+    transform: translateY(-10px);
+}
+
+.public-card-body {
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.public-card-body h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.category-badge {
+    background: #333;
+    color: var(--primary-color);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.view-btn {
+    display: block;
+    text-align: center;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    margin-top: auto;
+    font-weight: bold;
+}
+
+
+/* --- Details Page Styles --- */
+
+.details-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: var(--card-bg); /* اللون الأسود الذي اخترته */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    color: var(--text-color); /* النص الأبيض */
+    line-height: 1.8;
+}
+
+.details-header {
+    border-bottom: 2px solid var(--primary-color); /* الخط الأخضر السعودي */
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
+
+.details-header h1 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.description-text {
+    font-size: 1.2rem;
+    white-space: pre-line; /* للحفاظ على تنسيق الأسطر المكتوبة في قاعدة البيانات */
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 30px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.back-btn:hover {
+    transform: translateX(-5px);
+}
