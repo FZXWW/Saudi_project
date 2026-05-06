@@ -1,38 +1,60 @@
+
+/* --- تعريف المتغيرات (الوضع الداكن الافتراضي) --- */
 :root {
-    /* الألوان الأساسية */
     --primary-color: #005e3b;
-    --primary-light: #008f5a; /* درجة أفتح للتدرجات */
-    --background-color: #616161;
-    --card-bg: #000000;
+    --primary-light: #008f5a;
+    --background-color: #1a1a1a; 
+    --card-bg: #2d2d2d;
     --card-hover-bg: #222222;
     --input-bg: rgba(0, 0, 0, 0.3);
     --input-focus-bg: rgba(0, 0, 0, 0.5);
-    
-    /* ألوان النصوص */
     --text-color: #ffffff;
     --text-muted: #bbbbbb;
-    
-    /* ألوان التنبيهات */
+    --navbar-bg: #005e3b;
     --error-color: #d93025;
     --error-bg: rgba(217, 48, 37, 0.1);
-    
-    /* التفاعلات والظلال */
-    --button-hover: #0069d2;
-    --transition-speed: 0.3s;
     --card-shadow: rgba(0, 0, 0, 0.5);
     --glow-shadow: rgba(0, 94, 59, 0.4);
+    --transition-speed: 0.3s;
 }
 
-/* --- الإعدادات العامة --- */
+/* --- إعدادات الوضع الفاتح (Light Mode Override) --- */
+body.light-mode {
+    --background-color: #f4f4f4;
+    --card-bg: #ffffff;
+    --card-hover-bg: #f9f9f9;
+    --input-bg: #eeeeee;
+    --input-focus-bg: #e0e0e0;
+    --text-color: #1a1a1a;
+    --text-muted: #555555;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* --- الإعدادات العامة للموقع --- */
 body {
     font-family: 'Arial', sans-serif;
     background-color: var(--background-color);
-    margin: 0;
     color: var(--text-color);
+    margin: 0;
     display: block;
     height: auto;
+    transition: background-color 0.4s ease, color 0.4s ease;
     min-height: 100vh;
 }
+
+/* --- شريط التنقل (Navbar) --- */
+.navbar {
+    background-color: var(--navbar-bg);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
 
 /* --- صفحة تسجيل الدخول (Login) --- */
 .login-body {
@@ -321,4 +343,18 @@ th { background-color: var(--primary-color); color: var(--text-color); }
 /* لمسة جمالية: إضافة تأثير الضغط */
 .btn-add:active, .btn-update:active, .btn-delete:active, btn-logout:active {
     transform: translateY(1px);
+}
+
+#theme-toggle {
+    transition: transform 0.3s ease;
+    outline: none;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.2); /* يكبر قليلاً عند وضع الماوس عليه */
+}
+
+/* لضمان ظهور النص بشكل صحيح في الوضع الفاتح */
+body.light-mode #theme-toggle {
+    color: #000; 
 }

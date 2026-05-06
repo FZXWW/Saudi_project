@@ -7,14 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">اكتشف السعودية</div>
-        <div class="nav-links">
-            <a href="index.php">الرئيسية</a>
-            <a href="#explore">معرض المناطق</a>
-            <a href="login.php">دخول المشرف</a>
-        </div>
-    </nav>
+<nav class="navbar">
+    <div class="logo">اكتشف السعودية</div>
+    <div class="nav-links">
+        <a href="index.php">الرئيسية</a>
+        <a href="#explore">معرض المناطق</a>
+        <a href="login.php">دخول المشرف</a>
+        
+        <span id="theme-toggle" style="cursor: pointer; font-size: 1.2rem; margin-right: 15px; user-select: none;">
+            🌙
+        </span>
+    </div>
+</nav>
 
     <header class="hero-banner">
         <div class="hero-text" style="padding: 50px 5%;">
@@ -63,5 +67,29 @@
     <footer style="text-align: center; padding: 40px; background: #333;">
         © 2026 اكتشف السعودية — جامعة الملك سعود
     </footer>
+
+    <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // التحقق من الوضع المحفوظ مسبقاً
+    if (localStorage.getItem('theme') === 'light') {
+        body.classList.add('light-mode');
+        themeToggle.innerText = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        
+        // حفظ الخيار وتغيير الأيقونة
+        if (body.classList.contains('light-mode')) {
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerText = '☀️';
+        } else {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerText = '🌙';
+        }
+    });
+</script>
 </body>
 </html>
