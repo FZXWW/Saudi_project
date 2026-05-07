@@ -64,7 +64,7 @@
         <?php endwhile; ?>
     </main>
 
-    <footer style="text-align: center; padding: 40px; background: #333;">
+    <footer style="text-align: center; padding: 40px;">
         © 2026 اكتشف السعودية — جامعة الملك سعود
     </footer>
 

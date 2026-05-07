@@ -20,14 +20,14 @@
 
 /* --- إعدادات الوضع الفاتح (Light Mode Override) --- */
 body.light-mode {
-    --background-color: #f4f4f4;
-    --card-bg: #ffffff;
-    --card-hover-bg: #f9f9f9;
-    --input-bg: #eeeeee;
-    --input-focus-bg: #e0e0e0;
-    --text-color: #1a1a1a;
-    --text-muted: #555555;
-    --card-shadow: rgba(0, 0, 0, 0.1);
+    --background-color: #f4f4f4 !important;
+    --card-bg: #ffffff !important;
+    --card-hover-bg: #f9f9f9 !important;
+    --input-bg: #eeeeee !important;
+    --input-focus-bg: #e0e0e0 !important;
+    --text-color: #1a1a1a !important;
+    --text-muted: #555555 !important;
+    --card-shadow: rgba(0, 0, 0, 0.1) !important;
 }
 
 /* --- الإعدادات العامة للموقع --- */
@@ -58,7 +58,7 @@ body {
 
 /* --- صفحة تسجيل الدخول (Login) --- */
 .login-body {
-    background: linear-gradient(135deg, #1a1a1a 0%, var(--background-color) 100%) !important;
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--background-color) 100%) !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -123,17 +123,6 @@ body {
     box-shadow: 0 10px 20px var(--glow-shadow);
 }
 
-/* --- شريط التنقل (Navbar) --- */
-.navbar {
-    background-color: var(--primary-color);
-    padding: 1rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
 
 .nav-links a {
     color: var(--text-color);
@@ -336,7 +325,7 @@ th { background-color: var(--primary-color); color: var(--text-color); }
 .btn-delete:hover, .btn-logout:hover {
     background-color: var(--error-color);
     color: var(--text-color);
-    transform: scale(1.05);
+    transform: scale(1.05); 
     box-shadow: 0 4px 12px rgba(217, 48, 37, 0.3);
 }
 
