@@ -79,6 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="dashboard.php">لوحة التحكم</a>
             <a href="logout.php" style="color: var(--error-color);">تسجيل الخروج</a>
         </div>
+        <div class="nav-links">
+            <span id="theme-toggle" style="cursor: pointer; font-size: 1.2rem; margin-right: 15px; user-select: none;">
+                🌙
+            </span>
+        </div>
     </nav>
 
     <div class="form-container" style="max-width: 900px; margin-top: 40px;">

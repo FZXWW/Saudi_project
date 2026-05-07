@@ -35,6 +35,10 @@ if (!$data) {
             <a href="index.php">الرئيسية</a>
             <a href="index.php#explore">معرض المناطق</a>
             <a href="login.php">دخول المشرف</a>
+
+            <span id="theme-toggle" style="cursor: pointer; font-size: 1.2rem; margin-right: 15px; user-select: none;">
+                🌙
+            </span>
         </div>
     </nav>
 

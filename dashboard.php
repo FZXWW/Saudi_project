@@ -24,6 +24,14 @@ $result = $conn->query($query);
 </head>
 <body>
 
+    <nav class="navbar">
+        <div class="nav-links">
+            <span id="theme-toggle" style="cursor: pointer; font-size: 1.2rem; margin-right: 15px; user-select: none;">
+              🌙
+            </span>
+        </div>
+    </nav>
+
 <div class="container">
     <a href="logout.php" class="btn-logout">تسجيل الخروج</a>
     <h2>لوحة تحكم المشرف - إدارة المحتوى</h2>
