@@ -168,5 +168,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
+    <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // التحقق من الوضع المحفوظ مسبقاً
+    if (localStorage.getItem('theme') === 'light') {
+        body.classList.add('light-mode');
+        themeToggle.innerText = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        
+        // حفظ الخيار وتغيير الأيقونة
+        if (body.classList.contains('light-mode')) {
+            localStorage.setItem('theme', 'light');
+            themeToggle.innerText = '☀️';
+        } else {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.innerText = '🌙';
+        }
+    });
+</script>
 </body>
 </html>
